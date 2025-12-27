@@ -1,4 +1,4 @@
-# Customer-Churn-Analysis-EDA-Python-Project
+# Customer-Churn-Analysis-Excel-EDA-Python-ML-Project
 This repository contains a customer_churn_analysis using python(EDA-Exploratory Data Analysis).Churn Analysis is the process of identifying customers who are likely to stop using a company’s product or service.
 
 ### ✅ Project Overview
