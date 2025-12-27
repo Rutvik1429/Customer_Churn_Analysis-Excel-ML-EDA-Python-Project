@@ -2,17 +2,43 @@
 This repository contains a customer_churn_analysis using python(EDA-Exploratory Data Analysis).Churn Analysis is the process of identifying customers who are likely to stop using a company’s product or service.
 
 ### ✅ Project Overview
-This project focuses on analyzing customer churn using exploratory data analysis (EDA) techniques in Python. Customer churn refers to customers who stop using a company's services or products. The primary aim is to identify patterns, trends, and factors that lead to customer attrition, helping businesses understand customer behavior and take proactive steps to reduce churn.
+This project focuses on analyzing **customer churn behavior** using an interactive **Excel dashboard**.  
+The objective is to identify key factors driving churn and provide **data-driven insights** to help businesses improve customer retention and reduce revenue loss.
 
-The dataset used in this project is the Telco Customer Churn dataset, which contains customer information, services subscribed, demographic details, and churn labels.
+The dashboard is designed for **subscription-based businesses** such as **Telecom, SaaS, and Internet Service Providers**.
+![Customers Churn Analysis](https://github.com/Rutvik1429/Customer_Churn_Analysis-Excel-ML-EDA-Python-Project/blob/main/Customers_Churn_Analysis_Dashboard.png)
 
-# 🎯 Objective
-## The key objectives of this project are:
-- ✅ To explore customer data and understand the distribution of features.
-- ✅ To preprocess data by handling missing values, incorrect data types, and converting categorical variables.
-- ✅ To visualize the relationships between customer attributes and churn behavior.
-- ✅ To uncover patterns and insights that contribute to customer churn.
-- ✅ To provide actionable insights that can help businesses improve customer retention.
+## 🛠 Tools & Technologies Used
+- Microsoft Excel, Python, ML(Random forest Model)
+- Pivot Tables
+- Pivot Charts
+- Slicers (Gender, Dependents)
+- Conditional Formatting
+- Excel Dashboard Design (Shapes, Icons, KPI Cards)
+
+## 📈 Key KPIs
+- **Total Customers:** 7.04K  
+- **Total Churned Customers:** 1.87K  
+- **Churn Rate:** 26.54%  
+- **Average Monthly Charges:** $64.76  
+- **Average Customer Tenure:** 32 Months  
+
+## 📊 Dashboard Features
+- Churn distribution (Yes vs No)
+- Churn analysis by:
+  - Tenure Group
+  - Contract Type
+  - Payment Method
+  - Internet Service Type
+- Monthly Charges comparison (Churn vs No Churn)
+- Interactive filtering using slicers
+
+## 💡 Business Recommendations
+- Improve customer onboarding during the first year
+- Convert month-to-month users into long-term contracts
+- Review pricing and service quality for fiber optic plans
+- Promote automatic payment methods with incentives
+- Introduce family or bundled plans
 
 # 📂 Dataset Description
 ## The dataset includes the following fields:
@@ -186,8 +212,25 @@ plt.show()
 
 # 💡 Key Insights
 
-### 📌 Customers on month-to-month contracts are at the highest risk of churning.
-### 📌 Providing tech support, online security, and other services can enhance customer satisfaction and reduce churn.
-### 📌 Tenure plays a major role in customer retention; customers who stay longer are less likely to churn.
-### 📌 Senior citizens require special attention in retention strategies.
-### 📌 Offering annual or long-term contracts can improve customer loyalty.
+### 1️⃣ High Overall Churn Rate
+- Churn rate of **26.54%**, meaning nearly **1 in 4 customers leave**.
+- Indicates serious revenue risk.
+### 2️⃣ New Customers Churn the Most
+- **56% of churned customers** have a tenure of **0–12 months**.
+- Suggests poor onboarding or early customer experience.
+### 3️⃣ Month-to-Month Contracts Drive Maximum Churn
+- Month-to-month customers show the **highest churn**.
+- Long-term contract customers are more loyal.
+### 4️⃣ Fiber Optic Customers Have Higher Churn
+- Fiber optic users account for the **largest share of churn**.
+- Possibly due to higher prices or service expectations.
+### 5️⃣ Payment Method Influences Churn
+- **Electronic check users have the highest churn**.
+- Automatic payment methods show lower churn.
+### 6️⃣ Higher Monthly Charges Increase Churn Risk
+- **Avg Monthly Charges (Churned): $74.44**
+- **Avg Monthly Charges (Retained): $61.27**
+- Indicates price sensitivity.
+### 7️⃣ Customers with Dependents Are More Loyal
+- Customers with dependents churn less.
+- Family-oriented users show higher retention.
