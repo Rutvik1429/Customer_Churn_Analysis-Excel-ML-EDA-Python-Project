@@ -377,6 +377,22 @@ print("Churn Prediction:", "Yes" if prediction[0] == 1 else "No")
 
 ```
  **Churn Prediction: No**
+
+# 🤖 Model Used in This Project
+## ✅ Random Forest Classifier
+### In this project, a Random Forest Classifier is used to predict customer churn.
+
+## 🔍 Why Random Forest Is a Good Choice for Churn Prediction
+### Handles non-linear relationships
+- Customer behavior is complex and not linear; Random Forest captures this effectively.
+### Works well with mixed data types
+- Supports both numerical and categorical features after encoding.
+### Robust to noise and outliers
+- Reduces overfitting by averaging multiple decision trees.
+### Provides feature importance
+- Helps identify key churn drivers, which is valuable for business insights.
+### Strong performance on tabular data
+- Ideal for structured datasets like customer churn data.
  
 # 💡 Key Insights
 
@@ -402,3 +418,6 @@ print("Churn Prediction:", "Yes" if prediction[0] == 1 else "No")
 ### 7️⃣ Customers with Dependents Are More Loyal
 - Customers with dependents churn less.
 - Family-oriented users show higher retention.
+
+## 🧠 Summary
+- Built a Customer Churn Prediction model using Random Forest to identify high-risk customers and provide actionable insights for improving customer retention.
