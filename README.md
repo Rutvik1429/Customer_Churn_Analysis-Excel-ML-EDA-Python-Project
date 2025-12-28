@@ -210,6 +210,174 @@ plt.show()
 ![Contract Types](https://github.com/Rutvik1429/Customer-Churn-Analysis-EDA-Python-Project/blob/main/visual_plot/Count%20of%20Customer%20By%20Contract.png)
 - Customers with month-to-month contracts exhibit higher churn rates, whereas those with one or two-year contracts tend to stay longer.
 
+# Python (ML): Customer Churn Prediction
+## Why Customer Churn Prediction Is Important
+- Customer churn prediction is critical for subscription-based businesses because acquiring new customers is 5–7 times more expensive than retaining existing ones.
+### Early identification of at-risk customers
+- Helps businesses take preventive actions before customers leave.
+### Improved customer experience
+- Identifies service or pricing issues affecting customer satisfaction.
+### Data-driven decision making
+- Moves businesses from reactive to proactive retention strategies.
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    classification_report,
+    roc_auc_score
+)
+```
+### Used for:
+- Data splitting
+- Encoding categorical data
+- Machine learning models
+- Model evaluation metrics
+```python
+df = pd.read_csv("Telco-Customer-Churn-checkpoint.csv")
+df.head()
+df.drop(columns=['customerID'], inplace=True)
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+df['TotalCharges'].fillna(df['TotalCharges'].median(), inplace=True)
+
+# Convert target variable into binary format
+# Yes → 1 (Churned)
+# No  → 0 (Not Churned)
+df['Churn'] = df['Churn'].map({'Yes': 1, 'No': 0})
+
+# Features (independent variables)
+X = df.drop(columns=['Churn'])
+
+# Target variable
+y = df['Churn']
+
+# Identify categorical columns
+categorical_cols = X.select_dtypes(include='object').columns
+
+# Initialize Label Encoder
+le = LabelEncoder()
+
+# Encode each categorical column
+for col in categorical_cols:
+    X[col] = le.fit_transform(X[col])
+
+```
+- Machine learning models cannot work with text
+- Label Encoding works well with tree-based models
+```python
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,      # 20% test data
+    random_state=42,    # Reproducibility
+    stratify=y          # Maintain churn ratio
+)
+# Initialize Random Forest Classifier
+rf_model = RandomForestClassifier(
+    n_estimators=200,   # Number of trees
+    max_depth=10,       # Limit tree depth to avoid overfitting
+    random_state=42
+)
+# Train the model using training data
+rf_model.fit(X_train, y_train)
+# Predict churn (0 or 1)
+y_pred = rf_model.predict(X_test)
+
+# Predict churn probability
+y_prob = rf_model.predict_proba(X_test)[:, 1]
+
+```
+- Prevents class imbalance between train & test sets
+- Random Forest combines multiple decision trees
+- Reduces overfitting and improves accuracy
+- Probabilities are used for ROC AUC score
+
+```python
+# Print accuracy score
+print("Accuracy:", accuracy_score(y_test, y_pred))
+
+# Print ROC AUC score
+print("ROC AUC:", roc_auc_score(y_test, y_prob))
+
+# Detailed classification metrics
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+```
+### Accuracy: 0.8005677785663591
+### ROC AUC: 0.8363145521713296
+
+### Classification Report:
+               precision    recall  f1-score   support
+
+           0       0.84      0.90      0.87      1035
+           1       0.66      0.52      0.58       374
+
+    accuracy                           0.80      1409
+    macro avg       0.75      0.71      0.73      1409
+    weighted avg       0.79      0.80      0.79      1409
+
+- Accuracy → Overall correctness
+- ROC AUC → Model’s ability to distinguish churn vs non-churn
+- Precision / Recall / F1-score → Class-level performance
+```python
+# Generate confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Visualize confusion matrix
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
+plt.savefig("Predict vs Actual.png", dpi=2000, bbox_inches="tight")
+```
+![Predict vs actual](https://github.com/Rutvik1429/Customer_Churn_Analysis-Excel-ML-EDA-Python-Project/blob/main/visual_plot/Predict%20vs%20Actual.png)
+- Helps identify false positives & false negatives
+```python
+# Extract feature importance from Random Forest
+feature_importance = pd.Series(
+    rf_model.feature_importances_,
+    index=X.columns
+).sort_values(ascending=False)
+
+# Display top 10 important features
+feature_importance.head(10)
+
+```
+### Output: *Display top 10 important features*
+- tenure              0.160796
+- TotalCharges        0.153232
+- MonthlyCharges      0.142026
+- Contract            0.129100
+- OnlineSecurity      0.075669
+- TechSupport         0.059941
+- InternetService     0.044289
+- PaymentMethod       0.043713
+- OnlineBackup        0.028245
+- PaperlessBilling    0.025127
+- dtype: float64
+
+## Predict Churn for a Single Customer
+```python
+# Select a sample customer from test set
+sample_customer = X_test.iloc[0:1]
+
+# Predict churn for that customer
+prediction = rf_model.predict(sample_customer)
+
+print("Churn Prediction:", "Yes" if prediction[0] == 1 else "No")
+
+```
+ **Churn Prediction: No**
+ 
 # 💡 Key Insights
 
 ### 1️⃣ High Overall Churn Rate
